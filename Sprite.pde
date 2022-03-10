@@ -13,31 +13,31 @@ float w, h;
     change_y = 0;
   }
   public void display(){
-    image(image, center_x, center_y, w, h);//what to draw, x, y, w and h not necessary 
+    image(image, center_x, center_y, w, h); //what to draw, x, y, w and h not necessary 
   }
 
-void setLeft(float newLeft){ //we know the boundaries of one side with get and set the opposite side with set
+void setLeft(float newLeft){ 
     center_x = newLeft + w/2;
   }
-  float getLeft(){ //left boundary of the image
-    return center_x - w/2; //since we originally write the center position of an image (in the map?) we can find where the most left coordinate is
-  }
-  void setRight(float newRight){
-    center_x = newRight - w/2;
-  }
-  float getRight(){
-    return center_x + w/2;
-  }
-  void setTop(float newTop){
-    center_y = newTop + h/2;
-  }
-  float getTop(){
-    return center_y - h/2;
-  }
-  void setBottom(float newBottom){
-    center_y = newBottom - h/2;
-  }
-  float getBottom(){
-    return center_y + h/2;
-  }
+float getLeft(){ //left boundary of the image/sprite
+  return center_x - w/2; //since we originally write the center position of an image (in Sprite) we can find where the most left coordinate is
+}
+void setRight(float newRight){
+  center_x = newRight - w/2;
+}
+float getRight(){
+  return center_x + w/2;
+}
+void setTop(float newTop){
+  center_y = newTop + h/2;
+}
+float getTop(){
+  return center_y - h/2;
+}
+void setBottom(float newBottom){  //we know the boundaries of one side with get and set the opposite side (set can modify boundaries when there is movement)
+  center_y = newBottom - h/2; //for example if im jumping then i need getTop of platform and setBottom of player sprites
+}
+float getBottom(){
+  return center_y + h/2;
+}
 }
