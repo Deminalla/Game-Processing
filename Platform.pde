@@ -19,8 +19,8 @@ float view_x = 0, view_y = 0;
 ArrayList <Sprite> platforms;
 ArrayList <Sprite> flags;
 String[] SpriteNames = {"Tiles/choco.png", "Tiles/chocoCenter.png", "Tiles/chocoHalfAlt.png", "Tiles/chocoHalfAltBig.png"};
-String flag = "Platformer Art Complete Pack/Base pack/Items/flagYellow.png";
-String ifly = "Platformer Art Complete Pack/Base pack/Enemies/flyFly3.png";
+String flag = "Items/flagYellow.png";
+String ifly = "Enemies/flyFly3.png";
 String p = "Player/idle_right.png";
 
 void setup(){      //runs once
