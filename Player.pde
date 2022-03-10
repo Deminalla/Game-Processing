@@ -28,49 +28,39 @@ public class Player extends Animation{
     moveLeft[2] = loadImage("Player/Walk_left (9).png");
     moveLeft[3] = loadImage("Player/Walk_left (12).png");
     moveLeft[4] = loadImage("Player/Walk_left (15).png");
-    currentImages = standRight;
+    state = standRight;
   }
   public void updateAnimation(){
     onPlatform = isOnPlatform(this, platforms);
-    standStill = change_x==0 && change_y==0; //not moving
-    //v or write super.updateAnimation(); v
+    standStill = change_x==0 && change_y==0;   //not moving
     frame++;
-    if(frame%5==0){ 
+    if(frame%5==0){
       directionLeftRight();
-      getCurrentImages(); 
+      getState(); 
       nextImage();
     }
-    //^ or write super.updateAnimation(); ^
   }
-  public void directionLeftRight(){
-    if(change_x>0){ //if im going right
-    direction = FACE_RIGHT;
-    }
-    else if(change_x<0){ //if im going left
-    direction = FACE_LEFT;
-    }
-  }
-  public void getCurrentImages(){
+  public void getState(){
     if(direction==FACE_RIGHT){
       if(standStill){
-        currentImages = standRight;
+        state = standRight;
       }
       else if (!onPlatform){
-        currentImages = jumpRight;
+        state = jumpRight;
       }
       else {
-        currentImages = moveRight;
+        state = moveRight;
       }
     }
     else if(direction==FACE_LEFT){
       if(standStill){
-        currentImages = standLeft;
+        state = standLeft;
       }
       else if (!onPlatform){
-        currentImages = jumpLeft;
+        state = jumpLeft;
       }
       else {
-        currentImages = moveLeft;
+        state = moveLeft;
       }
     }
   }
