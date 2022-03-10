@@ -1,5 +1,5 @@
 public class Animation extends Sprite{
-  PImage[] currentImages;
+  PImage[] state;
   PImage[] neutral;
   PImage[] moveLeft;
   PImage[] moveRight;
@@ -11,9 +11,9 @@ public class Animation extends Sprite{
   }
   public void updateAnimation(){
     frame++;
-    if(frame%5==0){ //update every 5 frame
+    if(frame%5==0){       //update every 5 frame
       directionLeftRight();
-      getCurrentImages(); //which array to pick
+      getState(); //which array to pick
       nextImage();
     }
   }
@@ -25,19 +25,19 @@ public class Animation extends Sprite{
     direction = FACE_LEFT;
     }
   }
-  public void getCurrentImages(){
+  public void getState(){
     if(direction==FACE_RIGHT){
-      currentImages = moveRight;
+      state = moveRight;
     }
     else if(direction==FACE_LEFT){
-      currentImages = moveLeft;
+      state = moveLeft;
     }
   }
   public void nextImage(){
     i++; //cycle through the array
-    if (i >= currentImages.length){ //if i reach the end of array
+    if (i >= state.length){ //if i reach the end of array
     i = 0; //so it can loop back later  
   }
-    image = currentImages[i];
+    image = state[i];
   }
 }
