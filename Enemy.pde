@@ -3,11 +3,11 @@ public class Enemy extends Animation{
 public Enemy(String img, float scale, float leftB, float rightB){
     super (img, scale, 0, 0);
     moveLeft = new PImage[2];
-    moveLeft[0] = loadImage("Platformer Art Complete Pack/Base pack/Enemies/flyFly1.png");
-    moveLeft[1] = loadImage("Platformer Art Complete Pack/Base pack/Enemies/flyFly2.png");  
+    moveLeft[0] = loadImage("Enemies/flyFly1.png");
+    moveLeft[1] = loadImage("Enemies/flyFly2.png");  
     moveRight = new PImage[2];
-    moveRight[0] = loadImage("Platformer Art Complete Pack/Base pack/Enemies/flyFly3.png");
-    moveRight[1] = loadImage("Platformer Art Complete Pack/Base pack/Enemies/flyFly4.png");  
+    moveRight[0] = loadImage("Enemies/flyFly3.png");
+    moveRight[1] = loadImage("Enemies/flyFly4.png");  
     currentImages = moveRight; 
     direction = FACE_RIGHT;
     leftBoundary = leftB;
