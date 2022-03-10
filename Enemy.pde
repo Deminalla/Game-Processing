@@ -8,7 +8,7 @@ public Enemy(String img, float scale, float leftB, float rightB){
     moveRight = new PImage[2];
     moveRight[0] = loadImage("Enemies/flyFly3.png");
     moveRight[1] = loadImage("Enemies/flyFly4.png");  
-    currentImages = moveRight; 
+    state = moveRight; 
     direction = FACE_RIGHT;
     leftBoundary = leftB;
     rightBoundary = rightB;
@@ -23,7 +23,7 @@ void update(){
   }
   else if(getRight() >= rightBoundary){
     setRight(rightBoundary);
-    change_x = -change_x;
+    change_x = -change_x; 
   }
 }
 }
