@@ -15,7 +15,7 @@ int timeLeft = 21*60;
 
 Player player;
 Enemy fly;
-float view_x = 0, view_y = 0;
+float screen_x = 0, screen_y = 0; //top left of screen
 ArrayList <Sprite> platforms;
 ArrayList <Sprite> flags;
 String[] SpriteNames = {"Tiles/choco.png", "Tiles/chocoCenter.png", "Tiles/chocoHalfAlt.png", "Tiles/chocoHalfAltBig.png"};
@@ -99,7 +99,7 @@ s.display();
 }
 for(Sprite f: flags){ 
 f.display();
-((Animation)f).updateAnimation(); //casting?????
+((Animation)f).updateAnimation(); //casting/converting data type
 if (checkCollision(player, f)){
   flagReached = 1;
 }}
@@ -166,45 +166,45 @@ if (timeLeft/60 == 0){
 
 }
 void scroll(){
-  float right_boundary = view_x + width - RIGHT_SCREEN_EDGE; //width = of the screen
+  float right_boundary = screen_x + width - RIGHT_SCREEN_EDGE; //width = of the screen
   if(player.center_x > right_boundary){ //if we go outside the right boundary    alternative  player.getRight() > right_boundary  then  view_x = view_x + player.getRight() - right_boundary
-  view_x = view_x + player.center_x - right_boundary; //add player's right bound - with our section's set boundary difference to compensate accordingly
+  screen_x = screen_x + player.center_x - right_boundary; //add the amount the player is out of RIGHT_SCREEN_EDGE
   }
-  float left_boundary = view_x + LEFT_SCREEN_EDGE;
+  float left_boundary = screen_x + LEFT_SCREEN_EDGE;
   if(player.center_x < left_boundary){
-  view_x = view_x - (left_boundary - player.center_x); //if we go left we subtract
+  screen_x = screen_x - (left_boundary - player.center_x); //if we go left we subtract
   }
-  translate(-view_x, -view_y); //tranlsate displases objects
+  translate(-screen_x, -screen_y); //tranlsate displases objects, moves the coordinates of map
 }
-public boolean isOnPlatform(Sprite s, ArrayList<Sprite> objects){ //maybe write Sprite p instead of s because we are looking at player, objects is an arraylist ive created with Sprite
-  s.center_y = s.center_y + 1; //lets say we move our character down, we want to check if there will be any collision
-  ArrayList<Sprite> coll_list = checkCollisionList(s, objects);
-  s.center_y = s.center_y - 1; //restore it to its original position
-  if (coll_list.size()>0){ //if the array is not empty, then we are on a platform, because its colliding with smth
+public boolean isOnPlatform(Sprite s, ArrayList<Sprite> objects){   
+  s.center_y = s.center_y + 1;     //lets say we move our character down, we want to check if there will be any collision
+  ArrayList<Sprite> coll_list = checkCollisionList(s, objects); //all the stuff in objects that s collides with
+  s.center_y = s.center_y - 1;     //restore it to its original position
+  if (coll_list.size()>0){         //if the array is not empty, then we are on a platform, because its colliding with smth
   return true;  
 }
 else return false;
 }
 
-public void resolvePlatformCollisions(Sprite s, ArrayList<Sprite> objects){
+public void resolvePlatformCollisions(Sprite s, ArrayList<Sprite> objects){  
   s.change_y = s.change_y + GRAVITY; 
   
   s.center_y = s.center_y + s.change_y;
   ArrayList<Sprite> coll_list = checkCollisionList(s, objects); 
-  if(coll_list.size()>0){ //if we collided with smth while moving in y direction
-  Sprite collided = coll_list.get(0); //get the first platform that we collide with
-  if(s.change_y>0){ //if we are falling down
-    s.setBottom(collided.getTop()); //get the top part of the platform and equal it to the bottom of the player
+  if(coll_list.size()>0){     //if we collided with smth while moving in y direction
+  Sprite collided = coll_list.get(0);   //get the first platform that we collide with
+  if(s.change_y>0){           
+    s.setBottom(collided.getTop());     
   }
-  else if (s.change_y<0){ //if we are jumping
+  else if (s.change_y<0){     
   s.setTop(collided.getBottom());
   }
-  s.change_y = 0; //stop movement if we collided with smth
+  s.change_y = 0; 
 }
 
   s.center_x = s.center_x + s.change_x;
   coll_list = checkCollisionList(s, objects);
-  if(coll_list.size()>0){
+  if(coll_list.size()>0){ 
   Sprite collided = coll_list.get(0); 
   if(s.change_x>0){ 
     s.setRight(collided.getLeft()); 
@@ -230,7 +230,7 @@ public ArrayList<Sprite> checkCollisionList(Sprite s, ArrayList<Sprite> list){
   ArrayList<Sprite> collision_list = new ArrayList<Sprite>();
   for(Sprite t: list){ 
     if(checkCollision(s, t)) //if there is collision
-      collision_list.add(t); //an array of things t colides with
+      collision_list.add(t); //an array of things s colides with
   }
   return collision_list;
 }
@@ -254,7 +254,7 @@ void createPlatforms(String filename){
     }
     else if(values[col].equals("3")){ 
       float leftB = col * SPRITE_SIZE;
-      float rightB = leftB + 4 * SPRITE_SIZE; //4 is the amount of tiles it can move to the right
+      float rightB = leftB + 4 * SPRITE_SIZE; //move 4 tiles to the right
       fly = new Enemy(ifly, SPRITE_SCALE, leftB, rightB); 
       fly.center_x = SPRITE_SIZE/2 + col * SPRITE_SIZE;
       fly.center_y = SPRITE_SIZE/2 + row * SPRITE_SIZE; 
