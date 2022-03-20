@@ -5,7 +5,7 @@ public class Flag extends Animation{
     neutral[0] = loadImage("Items/flagYellow.png");
     neutral[1] = loadImage("Items/flagYellow2.png");
     neutral[2] = loadImage("Items/flagYellowHanging.png");  
-    currentImages = neutral;
+    state = neutral;
 }
 
 }
